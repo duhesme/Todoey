@@ -36,10 +36,12 @@ class CategoryTableViewController: SwipeTableViewController {
                 return
             }
             
-            let newCategory = Category()
-            newCategory.name = text
-            newCategory.colour = UIColor.randomFlat().hexValue()
-            self?.save(category: newCategory)
+            if !text.isEmpty {
+                let newCategory = Category()
+                newCategory.name = text
+                newCategory.colour = UIColor.randomFlat().hexValue()
+                self?.save(category: newCategory)
+            }
         }
         alert.addAction(action)
         
@@ -76,6 +78,7 @@ class CategoryTableViewController: SwipeTableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         performSegue(withIdentifier: "goToItems", sender: self)
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
