@@ -63,6 +63,7 @@ class CategoryTableViewController: SwipeTableViewController {
                 let newCategory = Category()
                 newCategory.name = text
                 newCategory.colour = UIColor.randomFlat().hexValue()
+                newCategory.dateCreated = Date()
                 self?.save(category: newCategory)
             }
         }
@@ -149,6 +150,22 @@ class CategoryTableViewController: SwipeTableViewController {
 }
 
 extension CategoryTableViewController: UISearchBarDelegate {
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        categories = categories?.filter("name CONTAINS[cd] %@", searchBar.text!).sorted(byKeyPath: "dateCreated", ascending: true)
+        tableView.reloadData()
+    }
+
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchBar.text?.count == 0 {
+            loadCategories()
+
+            DispatchQueue.main.async {
+                searchBar.resignFirstResponder()
+            }
+        }
+    }
+
     
 }
 
