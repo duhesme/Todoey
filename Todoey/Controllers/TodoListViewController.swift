@@ -7,7 +7,7 @@ class TodoListViewController: SwipeTableViewController {
     @IBOutlet weak var searchBar: UISearchBar!
     
     var todoItems: Results<Item>?
-    let realm = try! Realm()
+    let realm = DataStoreManager.shared.realm
     
     var selectedCategory: Category? {
         didSet {

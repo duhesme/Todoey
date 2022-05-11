@@ -4,7 +4,7 @@ import ChameleonFramework
 
 class CategoryTableViewController: SwipeTableViewController {
 
-    let realm = try! Realm()
+    let realm = DataStoreManager.shared.realm
     
     var categories: Results<Category>?
     
