@@ -15,8 +15,6 @@ class CategoryTableViewController: SwipeTableViewController {
         searchBar.delegate = self
         
         loadCategories()
-        
-        tableView.rowHeight = 80
     }
 
     @IBAction func addButtonPressed(_ sender: UIBarButtonItem) {
