@@ -22,6 +22,8 @@ class TodoListViewController: SwipeTableViewController {
     }
 
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
         if let colour = selectedCategory?.colour {
             title = selectedCategory!.name
             
@@ -30,10 +32,24 @@ class TodoListViewController: SwipeTableViewController {
             }
             
             if let colour = UIColor(hexString: colour) {
-                navBar.backgroundColor = colour
-                navBar.barTintColor = colour
-                navBar.tintColor = ContrastColorOf(colour, returnFlat: true)
-                navBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: ContrastColorOf(colour, returnFlat: true)]
+                let titleTextAttributes = [NSAttributedString.Key.foregroundColor: ContrastColorOf(colour, returnFlat: true)]
+                
+                if #available(iOS 15, *) {
+                    let appearance = UINavigationBarAppearance()
+                    appearance.configureWithOpaqueBackground()
+                    appearance.backgroundColor = colour
+                    appearance.largeTitleTextAttributes = titleTextAttributes
+                    appearance.titleTextAttributes = titleTextAttributes
+                    navBar.standardAppearance = appearance;
+                    navBar.scrollEdgeAppearance = navBar.standardAppearance
+                } else {
+                    navBar.backgroundColor = colour
+                    navBar.barTintColor = colour
+                    navBar.tintColor = ContrastColorOf(colour, returnFlat: true)
+                    navBar.largeTitleTextAttributes = titleTextAttributes
+                    navBar.titleTextAttributes = titleTextAttributes
+                }
+                
                 searchBar.barTintColor = colour
             }
         }

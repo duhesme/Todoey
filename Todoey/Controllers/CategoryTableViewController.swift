@@ -19,6 +19,8 @@ class CategoryTableViewController: SwipeTableViewController {
     }
 
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        
         guard let navBar = navigationController?.navigationBar else {
             fatalError("Navigation bar does not exist.")
         }

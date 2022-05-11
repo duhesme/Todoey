@@ -8,6 +8,16 @@ class SwipeTableViewController: UITableViewController, SwipeTableViewCellDelegat
         
         tableView.rowHeight = 80
         tableView.separatorStyle = .none
+        
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+//        let appearance = UINavigationBarAppearance()
+//        appearance.configureWithOpaqueBackground()
+//        appearance.backgroundColor = .red
+//        navigationController?.navigationBar.standardAppearance = appearance;
+//        navigationController?.navigationBar.scrollEdgeAppearance = navigationController?.navigationBar.standardAppearance
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
