@@ -25,7 +25,28 @@ class CategoryTableViewController: SwipeTableViewController {
             fatalError("Navigation bar does not exist.")
         }
         
-        navBar.backgroundColor = UIColor(hexString: "1D9BF6")
+        guard let colour = UIColor(hexString: "1D9BF6") else {
+            fatalError("Cannot instantiate navigation bar color.")
+        }
+        let titleTextAttributes = [NSAttributedString.Key.foregroundColor: ContrastColorOf(colour, returnFlat: true)]
+        
+        if #available(iOS 15, *) {
+            let appearance = UINavigationBarAppearance()
+            appearance.configureWithOpaqueBackground()
+            appearance.backgroundColor = colour
+            appearance.largeTitleTextAttributes = titleTextAttributes
+            appearance.titleTextAttributes = titleTextAttributes
+            navBar.standardAppearance = appearance;
+            navBar.scrollEdgeAppearance = navBar.standardAppearance
+        } else {
+            navBar.backgroundColor = colour
+            navBar.barTintColor = colour
+            navBar.tintColor = ContrastColorOf(colour, returnFlat: true)
+            navBar.largeTitleTextAttributes = titleTextAttributes
+            navBar.titleTextAttributes = titleTextAttributes
+        }
+        
+        searchBar.barTintColor = colour
     }
     
     @IBAction func addButtonPressed(_ sender: UIBarButtonItem) {
