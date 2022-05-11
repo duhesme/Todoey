@@ -1,8 +1,10 @@
 import UIKit
-import CoreData
+import RealmSwift
 
 class CategoryTableViewController: UITableViewController {
 
+    let realm = try! Realm()
+    
     var categoryArray = [Category]()
     
     @IBOutlet weak var searchBar: UISearchBar!
